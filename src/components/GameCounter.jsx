@@ -1,9 +1,9 @@
 import React from 'react'
 
-export const GameCounter = () => {
+export const GameCounter = (props) => {
   return (
     <h2 className='GameCounter'>
-        Has Completado <span>3</span> de <span>5</span> juegos
+        Has Completado <span>{props.completed}</span> de <span>{props.total}</span> juegos
     </h2>
   )
 }

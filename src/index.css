@@ -50,13 +50,17 @@ body {
 }
 
 .GameItem{
-  background-color: azure;
+  background-color: red;
   position: relative;
   display: flex;
   justify-content: center;
   align-items: center;
   margin-top: 24px;
   box-shadow: 0 5px 50px rgba(32, 35, 41, 0.15);
+}
+
+.GameItem-Active{
+  background-color: greenyellow;
 }
 
 .Icon{
@@ -75,7 +79,7 @@ body {
 }
 
 .Icon-check--active{
-  color: greenyellow;
+  visibility: hidden;
 }
 
 .Icon-delete{
