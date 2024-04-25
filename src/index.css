@@ -56,6 +56,7 @@ body {
   justify-content: center;
   align-items: center;
   margin-top: 24px;
+  border-radius: 8px;
   box-shadow: 0 5px 50px rgba(32, 35, 41, 0.15);
 }
 
@@ -134,4 +135,29 @@ body {
 
 .GameSearch:focus{
   outline-color: #61dafa;
+}
+
+/* ********* */
+/* Estilos de los modales */
+
+.modal-title{
+  padding: 10px;
+  flex: 0 0 15%;
+  background-color: #202329;
+  text-align: center;
+  color: white;
+}
+
+.modal-content{
+  flex: 0 0 60%;
+  padding: 10px;
+}
+
+.modal-item{
+  flex: 0 0 calc(50% - 20px);
+}
+
+.modal-btn{
+  margin-right: 10px;
+  max-height: 40px;
 }

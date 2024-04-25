@@ -5,6 +5,7 @@ import CreateGameButton from "./components/CreateGameButton";
 import GameItem from "./components/GameItem";
 import GameCounter from "./components/GameCounter";
 import React from "react";
+import { useLocalStorage } from "./hooks/useLocalStorage";
 
 const defaultGames = [
   {text : 'Cuphead', completed: false},
@@ -15,26 +16,12 @@ const defaultGames = [
   {text : 'Grand Theft Auto V', completed: true},
 ]
 
+
 function App() {
 
-  const localStorageGames = localStorage.getItem('Games');
-
-  let parsedGames;
-
-  if(!localStorageGames){
-    localStorage.setItem('Games', JSON.stringify(defaultGames))
-    parsedGames = []
-  } else {
-    parsedGames = JSON.parse(localStorageGames)
-  }
-
-  const saveGames = (newGames) => {
-    localStorage.setItem('Games', JSON.stringify(newGames))
-    setGames(newGames);
-  }
-
-  const [games, setGames] = React.useState(parsedGames);
+  const [games, saveGames] = useLocalStorage('Games', defaultGames)
   const [searchValue, setSearchValue] = React.useState('');
+  const [insertedGame, setInsertedGame] = React.useState('');
 
   //Estados Derivados
   const gamesCompleted = games.filter((game) => game.completed).length;
@@ -59,6 +46,26 @@ function App() {
       saveGames(newGames);
     }
 
+    React.useEffect(() => {
+      if(insertedGame){
+
+        if(games.filter((game) => game.text === insertedGame).length >=1){
+          {alert("Juego ya existente")}
+        }else{
+
+          let newGames;
+
+          newGames = [
+            ...games,
+            {text : insertedGame, completed: false},
+          ]
+          saveGames(newGames);
+          {alert("Guardado Exitoso")}
+        }
+      }
+      setInsertedGame('');
+    },[insertedGame])
+
   return (
     <div className="App">
 
@@ -81,7 +88,9 @@ function App() {
         ))}
       </GameList>
 
-      <CreateGameButton/>
+      <CreateGameButton
+        setInsertedGame = {setInsertedGame}
+      />
 
     </div>
   );
